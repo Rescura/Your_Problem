@@ -1,3 +1,12 @@
+import sys
 
-# 이 프로그램이 정상적으로 작동하는지 확인해 주세요.
-print("Hello CCPA!")
+# GUI에 필요한 모듈과 라이브러리 임포트
+from PyQt5 import QtWidgets
+from QtApplicationPart.MainGui import MainWindow
+
+# main을 실행시키면 MainGui.py의 MainWindow 인스턴스를 만들어 화면에 띄움
+if __name__ == "__main__" :
+    app = QtWidgets.QApplication(sys.argv)
+    myWindow = MainWindow() 
+    myWindow.show()
+    app.exec_()

@@ -1,0 +1,15 @@
+<RCC>
+  <qresource prefix="Fonts">
+    <file>Resources/Fonts/BCcardB.ttf</file>
+    <file>Resources/Fonts/BCcardL.ttf</file>
+    <file>Resources/Fonts/NEXONLv1GothicRegular.ttf</file>
+    <file>Resources/Fonts/paybooc Bold.ttf</file>
+    <file>Resources/Fonts/paybooc ExtraBold.ttf</file>
+    <file>Resources/Fonts/paybooc Light.ttf</file>
+    <file>Resources/Fonts/paybooc Medium.ttf</file>
+    <file>Resources/Fonts/Spoqa Han Sans Bold.ttf</file>
+    <file>Resources/Fonts/Spoqa Han Sans Regular.ttf</file>
+    <file>Resources/Fonts/TmoneyRoundWindRegular.ttf</file>
+  </qresource>
+  <qresource prefix="Images"/>
+</RCC>
