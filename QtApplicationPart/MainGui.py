@@ -1,10 +1,14 @@
 import sys
+import requests
 from PyQt5 import QtWidgets
 
 import requests
 from pathlib import Path
 from pprint import pprint
 
+# 필요한 클래스 임포트
+# MainGui.py를 직접 실행하면 ui_main 모듈안에 있는 클래스를 임포트 시켜야 함
+# main.py를 실행하면 QtApplicationPart 패키지로 접근해 ui_main 모듈안에 있는 클래스를 임포트 시켜야 함 
 if __name__ == '__main__':  from ui_main import Ui_MainWindow
 else : from QtApplicationPart.ui_main import Ui_MainWindow
 
@@ -48,6 +52,7 @@ class MainWindow(QtWidgets.QMainWindow) :
 
         
         #TODO : 서버에 전송하기
+
 
 if __name__ == "__main__" :
     app = QtWidgets.QApplication(sys.argv)

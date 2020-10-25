@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>877</width>
-    <height>736</height>
+    <width>883</width>
+    <height>758</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -40,8 +40,8 @@
    <property name="styleSheet">
     <string notr="true"/>
    </property>
-   <layout class="QGridLayout" name="gridLayout">
-    <item row="1" column="0">
+   <layout class="QGridLayout" name="gridLayout_3">
+    <item row="0" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -51,7 +51,7 @@
       </property>
       <property name="styleSheet">
        <string notr="true">QLabel {
-	font: 18pt &quot;NEXON Lv1 Gothic&quot;;
+	font: 18pt &quot;Tmoney RoundWind&quot;;
 	color: rgb(138, 137, 212);
 }
 
@@ -78,7 +78,7 @@ QLineEdit:hover{
 }</string>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="firstPage">
        <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,0,0,0,0">
@@ -136,7 +136,7 @@ QLineEdit:hover{
           </property>
           <property name="font">
            <font>
-            <family>NEXON Lv1 Gothic</family>
+            <family>Tmoney RoundWind</family>
             <pointsize>18</pointsize>
             <weight>50</weight>
             <italic>false</italic>
@@ -231,7 +231,7 @@ QLineEdit:hover{
           </property>
           <property name="font">
            <font>
-            <family>NEXON Lv1 Gothic</family>
+            <family>Tmoney RoundWind</family>
             <pointsize>18</pointsize>
             <weight>50</weight>
             <italic>false</italic>
@@ -303,8 +303,22 @@ QLineEdit:hover{
        </layout>
       </widget>
       <widget class="QWidget" name="thirdPage">
-       <layout class="QGridLayout" name="gridLayout_2" rowstretch="10,10,90,0">
-        <item row="3" column="0" alignment="Qt::AlignHCenter">
+       <layout class="QGridLayout" name="gridLayout_2" rowstretch="5,5,10,60,5">
+        <property name="verticalSpacing">
+         <number>6</number>
+        </property>
+        <item row="3" column="0" colspan="2">
+         <widget class="QTextEdit" name="problemTextEdit">
+          <property name="styleSheet">
+           <string notr="true">font: 14pt &quot;티머니 둥근바람 Regular&quot;;
+background-color: rgb(255, 255, 255);</string>
+          </property>
+          <property name="placeholderText">
+           <string notr="true">이곳에 고민을 적어주세요</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0" alignment="Qt::AlignHCenter">
          <widget class="QPushButton" name="backButton">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
@@ -323,30 +337,6 @@ QLineEdit:hover{
           </property>
          </widget>
         </item>
-        <item row="3" column="1" alignment="Qt::AlignHCenter">
-         <widget class="QPushButton" name="sendButton">
-          <property name="minimumSize">
-           <size>
-            <width>150</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>보내기</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="0" colspan="2">
-         <widget class="QTextEdit" name="problemTextEdit">
-          <property name="styleSheet">
-           <string notr="true">font: 14pt &quot;티머니 둥근바람 Regular&quot;;
-background-color: rgb(255, 255, 255);</string>
-          </property>
-          <property name="placeholderText">
-           <string notr="true">여기에 당신의 고민을 입력해주세요</string>
-          </property>
-         </widget>
-        </item>
         <item row="1" column="0" colspan="2">
          <widget class="QLabel" name="problemLabel2">
           <property name="sizePolicy">
@@ -355,8 +345,17 @@ background-color: rgb(255, 255, 255);</string>
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="autoFillBackground">
+           <bool>false</bool>
+          </property>
           <property name="styleSheet">
-           <string notr="true">font: 18pt &quot;Tmoney RoundWind&quot;;</string>
+           <string notr="true"/>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::NoFrame</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Plain</enum>
           </property>
           <property name="text">
            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;다른 사람이 이 고민을 보고 따뜻한 위로의 말이나 조언을 써서 답장을 보낼겁니다!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -372,33 +371,106 @@ background-color: rgb(255, 255, 255);</string>
           </property>
          </widget>
         </item>
-        <item row="0" column="0" colspan="2">
+        <item row="0" column="0" colspan="2" alignment="Qt::AlignTop">
          <widget class="QLabel" name="problemLabel1">
           <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
           <property name="styleSheet">
-           <string notr="true">font: 18pt &quot;Tmoney RoundWind&quot;;</string>
+           <string notr="true">font: 26pt &quot;Tmoney RoundWind&quot;;</string>
           </property>
           <property name="text">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:24pt; font-weight:600;&quot;&gt;당신의 고민을 적어주세요!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           <string>당신의 고민을 적어주세요!</string>
           </property>
           <property name="textFormat">
-           <enum>Qt::RichText</enum>
+           <enum>Qt::PlainText</enum>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
           </property>
           <property name="wordWrap">
            <bool>true</bool>
           </property>
           <property name="margin">
-           <number>20</number>
+           <number>16</number>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1" alignment="Qt::AlignHCenter">
+         <widget class="QPushButton" name="sendButton">
+          <property name="minimumSize">
+           <size>
+            <width>150</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>보내기</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0" colspan="2">
+         <widget class="QTextEdit" name="titleTextEdit">
+          <property name="styleSheet">
+           <string notr="true">font: 16pt &quot;티머니 둥근바람 Regular&quot;;
+background-color: rgb(255, 255, 255);</string>
+          </property>
+          <property name="placeholderText">
+           <string notr="true">고민의 제목을 입력해주세요</string>
           </property>
          </widget>
         </item>
        </layout>
       </widget>
+      <widget class="QWidget" name="fourthPage">
+       <layout class="QGridLayout" name="gridLayout">
+        <property name="verticalSpacing">
+         <number>10</number>
+        </property>
+        <item row="1" column="0">
+         <widget class="QListView" name="problemListView">
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>다른 사람의 고민에 답장해주세요!</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QLabel" name="consoleLabel">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel {
+	font: 15pt &quot;NEXON Lv1 Gothic&quot;;
+	color: rgb(138, 137, 212);
+}</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
      </widget>
     </item>
    </layout>
