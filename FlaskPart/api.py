@@ -122,4 +122,4 @@ api.add_resource(Replys, '/problems/<int:problem_id>/reply/<int:reply_id>')
 
 if __name__ == '__main__':
     database.create_table()
-    app.run(debug=True)
+    app.run()

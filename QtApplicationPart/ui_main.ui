@@ -78,7 +78,7 @@ QLineEdit:hover{
 }</string>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="firstPage">
        <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,0,0,0,0">

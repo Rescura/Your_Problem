@@ -1,10 +1,14 @@
 import sys
 import requests
+import pytz
+from datetime import datetime
 from PyQt5 import QtWidgets
 
 import requests
 from pathlib import Path
 from pprint import pprint
+
+
 
 # 필요한 클래스 임포트
 # MainGui.py를 직접 실행하면 ui_main 모듈안에 있는 클래스를 임포트 시켜야 함
@@ -18,6 +22,7 @@ class MainWindow(QtWidgets.QMainWindow) :
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.setWindowTitle("너의 이름은")
+        self.userName = 'No Username'
 
         self.ui.stackedWidget.setCurrentIndex(0)
         self.ui.nextButton1.clicked.connect(self.onNextButton1Click)
@@ -30,29 +35,39 @@ class MainWindow(QtWidgets.QMainWindow) :
         print("[nextButton1 Clicked] : 두번째 페이지로 이동합니다.")
 
     def onNextButton2Click(self):
-        userName = self.ui.nameLineEdit.text()
-        if userName == '': 
+        self.userName = self.ui.nameLineEdit.text()
+        if self.userName == '': 
             # self.ui.nameLabel.setStyleSheet('')
             self.ui.nameLabel.setText('불리고 싶은 이름을 입력해주세요!')
-        self.ui.stackedWidget.setCurrentIndex(2)
+        else :
+            self.ui.stackedWidget.setCurrentIndex(2)
         print("[nextButton2 Clicked] : 세번째 페이지로 이동합니다.")
 
     def onBackButtonClick(self):
-        self.ui.stackedWidget.setCurrentIndex(1)
         print("[backButton Clicked] : 두번째 페이지로 이동합니다.")
+        self.ui.stackedWidget.setCurrentIndex(1)
 
 
     def onSendButtonClick(self):
-        problemHtmlText = self.ui.problemTextEdit.toHtml()
-        print(problemHtmlText)
+        print("[sendButton Clicked] : 고민 내용을 모아서 서버에 업로드를 시도합니다.")
+        _problemTitle = self.ui.titleTextEdit.toPlainText()
+        _problemTime = datetime.now(pytz.timezone('Asia/Seoul')).strftime(r'%Y-%m-%d %H:%M:%S')
+        _problemContent = self.ui.problemTextEdit.toPlainText()
         
-        # 고민을 textEdit HTML 형식으로 저장시킴
-        with open('problem.html', 'w', encoding='utf8') as f:
-            f.write(problemHtmlText)
+        res = requests.post('http://127.0.0.1:5000/problems/',
+            data={
+                "problemTitle" : _problemTitle,
+                "problemAuthor" : self.userName,
+                "problemTime" : _problemTime,
+                "problemContent" : _problemContent
+                })
 
-        
-        #TODO : 서버에 전송하기
-
+        res_json = res.json()
+        if res_json["Message"] != 'Post Successful':
+            self.ui.consoleLabel.setText('고민을 서버에 업로드하는데 실패했습니다!')
+        else :
+            self.ui.consoleLabel.setText('고민을 서버에 성공적으로 업로드했습니다!')
+            self.ui.stackedWidget.setCurrentIndex(3)
 
 if __name__ == "__main__" :
     app = QtWidgets.QApplication(sys.argv)
