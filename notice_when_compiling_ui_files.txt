@@ -1,0 +1,6 @@
+try :
+        from QtApplicationPart import resources_rc
+except:
+        import resources_rc
+
+위 구문을 컴파일한 ui파일에 붙여넣을 것
