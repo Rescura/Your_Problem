@@ -102,6 +102,7 @@ class ReplysIndex(Resource):
         except Exception as e:
             return {'StatusCode' : '1000', 'Message' : f'Post Failed : {e}'}
 
+#uri : /problems/<int:problem_id>/replys/<int:reply_id>
 class Replys(Resource):
     def get(self, problem_id, reply_id):
         """ Replys.get : replyId == reply_id 인 답장의 전체 내용을 json파일로 보내준다. """
@@ -115,11 +116,31 @@ class Replys(Resource):
             "replyContent" : replyData[5]
         }
 
+# uri : /lights/<str:mode>
+class Lights(Resource):
+    def get(self, mode):
+        if mode == 'on' :
+            # TODO : LED를 켜는 함수 붙여넣기
+            pass
+        elif mode == 'off':
+            # TODO : LED를 끄는 함수 붙여넣기
+            pass
+        elif mode == 'brighter' :
+            # TODO : LED를 밝게 하는 함수 붙여넣기
+            pass
+        elif mode == 'dimmer' :
+            # TODO : LED를 어둡게 하는 함수 붙여넣기
+            pass
+
 api.add_resource(ProblemsIndex, '/problems/')
 api.add_resource(Problems, '/problems/<int:problem_id>/problem')
 api.add_resource(ReplysIndex, '/problems/<int:problem_id>/reply')
 api.add_resource(Replys, '/problems/<int:problem_id>/reply/<int:reply_id>')
+api.add_resource(Lights, '/lights/<str:mode>')
 
-if __name__ == '__main__':
+def runServer() : 
     database.create_table()
     app.run()
+
+if __name__ == '__main__':
+    runServer()
