@@ -34,7 +34,7 @@ class ProblemsIndex(Resource):
             "problemContent" : p[4][0:50]
         } ,problemsList))
 
-        return { "counts" : problemsCount, "problems" : problemsJsonList}
+        return { "Counts" : problemsCount, "Problems" : problemsJsonList}
 
     def post(self):
         """ ProblemsIndex.post : post로 json형식으로 보낸 나의 고민 정보를 데이터베이스에 추가시켜줌 """
@@ -90,7 +90,7 @@ class ReplysIndex(Resource):
             "replyContent" : reply[5][0:50]
         } ,replysList))
 
-        return { "counts" : replysCount, "problems" : replysJsonList}
+        return { "Counts" : replysCount, "Replys" : replysJsonList}
 
     def post(self, problem_id):
         """ problemId == id인 고민에 대한 답장 정보를 받아 DB에 추가한다. 그 후 응답을 한다. """
@@ -156,3 +156,4 @@ def runServer(f_debug: bool= False) :
 if __name__ == '__main__':
     runServer(f_debug=True)
     GPIO.cleanup()
+

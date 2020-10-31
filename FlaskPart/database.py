@@ -1,10 +1,12 @@
 import pymysql
 import datetime
 import pytz
+from colorama import init, Fore, Back, Style
+init(autoreset=True)
 
 def create_table() -> None:
     """ PROBLEMS 테이블과 REPLYS 테이블을 생성한다. """
-
+    print(f'{Fore.BLACK}{Back.CYAN}[database.py | create_table()] : 데이터베이스에 테이블을 생성합니다.')
     db = pymysql.connect(host='localhost', user='Admin_Your_Problem', password='admin1234', db='Your_Problem', charset='utf8')
     cur = db.cursor()
     cur.execute( '''
@@ -36,6 +38,8 @@ def create_table() -> None:
 def get_problems_list() -> list:
     """ PROBLEMS 테이블에서 최신순으로 고민 10개의 모든 정보를 반환한다. """
     
+    print(f"{Fore.BLACK}{Back.CYAN}[database.py | get_problems_list] : 최신순으로 고민 10개의 모든 정보를 반환합니다.")
+    
     db = pymysql.connect(host='localhost', user='Admin_Your_Problem', password='admin1234', db='Your_Problem', charset='utf8')
     cur = db.cursor()
     try :
@@ -50,6 +54,8 @@ def get_problems_list() -> list:
 
 def get_problem(f_problemId:int) -> tuple:
     """ problemId == f_problemId 인 고민의 모든 정보를 반환한다. """
+    
+    print(f"{Fore.BLACK}{Back.CYAN}[database.py | get_problem] : problemId = {f_problemId}인 고민의 모든 정보를 반환합니다.")
 
     db = pymysql.connect(host='localhost', user='Admin_Your_Problem', password='admin1234', db='Your_Problem', charset='utf8')
     cur = db.cursor()
@@ -64,7 +70,15 @@ def get_problem(f_problemId:int) -> tuple:
         raise e
 
 def insert_problem(f_title, f_author, f_time, f_content) -> int:
-    print(f'{Fore.BLUE}[database.py | insert_problem()]')
+    ''' PROBLEMS 데이터베이스에 새로운 고민 레이블을 추가한다.
+        새로 추가된 고민 레이블의 problemId를 int형으로 반환한다.'''
+    
+    print(f'{Fore.BLACK}{Back.CYAN}[database.py | insert_problem()] : 데이터베이스에 고민 정보를 추가합니다.')
+    print(f'    f_title : {f_title}')
+    print(f'    f_author : {f_author}')
+    print(f'    f_time : {f_time}')
+    print(f'    f_content : {f_content}')
+
     db = pymysql.connect(host='localhost', user='Admin_Your_Problem', password='admin1234', db='Your_Problem', charset='utf8')
     cur = db.cursor()
     try :
@@ -72,7 +86,7 @@ def insert_problem(f_title, f_author, f_time, f_content) -> int:
         cur.execute("INSERT INTO PROBLEMS (problemTitle, problemAuthor, problemTime, problemContent) VALUES (%s, %s, %s, %s)", (f_title, f_author, f_time, f_content))  #DB에 데이터 넣는 부분
         cur.execute('SELECT problemId FROM PROBLEMS WHERE problemTitle = %s AND problemAuthor = %s, problemContent = %s ORDER BY problemTime', (f_title, f_author, f_content))
         resultId = cur.fetchOne()[0]
-        print("[database.py] : Inserted Label's problemId : {resultId}")
+        print(f"{Fore.GREEN}{Back.BLUE}[database.py] : 추가된 고민 레이블의 problemId: {resultId}")
         db.commit()
         
         return resultId
@@ -81,12 +95,12 @@ def insert_problem(f_title, f_author, f_time, f_content) -> int:
         raise e
 
 def get_replys_list(f_id) -> list:
-    """ REPLY 테이블에서 problemId == f_id 인 고민에 대한 최신 응답 10개의 간략한 정보들을 반환한다. """
+    """ REPLY 테이블에서 problemId == f_id 인 고민에 대한 최신 답장 10개의 간략한 정보들을 반환한다. """
+    print(f'{Fore.BLACK}{Back.CYAN}[database.py | get_replys_list()] : problemId = {f_id}인 고민에 대한 답장의 모든 정보를 최신순으로 10개 반환합니다.')
     
     db = pymysql.connect(host='localhost', user='Admin_Your_Problem', password='admin1234', db='Your_Problem', charset='utf8')
     cur = db.cursor()
     try :
-        print('[database.py] : get_replys_list() 실행됨')
         cur = db.cursor()
         cur.execute("SELECT * FROM REPLYS WHERE problemId = %s ORDER BY replyTime", (f_id,))
         result = cur.fetchmany(10)
@@ -98,10 +112,10 @@ def get_replys_list(f_id) -> list:
 def get_reply(f_replyId:int) -> tuple:
     """ replyId == f_replyId 인 고민의 모든 정보를 반환한다. """
 
+    print(f'{Fore.BLACK}{Back.CYAN}[database.py | get_reply()] : replyId = {f_replyId}인 답장의 모든 정보를 반환합니다.')
     db = pymysql.connect(host='localhost', user='Admin_Your_Problem', password='admin1234', db='Your_Problem', charset='utf8')
     cur = db.cursor()
     try : 
-        print(f'[database.py] : get_reply({f_replyId}, {type(f_replyId)}) 실행됨')
         cur = db.cursor()
         cur.execute("SELECT * FROM REPLYS WHERE replyId = %s", (f_replyId, ))
         result = cur.fetchone()
@@ -111,6 +125,13 @@ def get_reply(f_replyId:int) -> tuple:
         raise e
 
 def insert_reply(f_problemId, f_title, f_author, f_time, f_content):
+    ''' problemId = f_problemId 인 고민에 대한 답장을 추가한다. '''
+
+    print(f'{Fore.BLACK}{Back.CYAN}[database.py | insert_reply()] : problemId = {f_problemId}인 고민에 답장을 추가합니다.')
+    print(f'    f_title : {f_title}')
+    print(f'    f_author : {f_author}')
+    print(f'    f_time : {f_time}')
+    print(f'    f_content : {f_content}')
     
     db = pymysql.connect(host='localhost', user='Admin_Your_Problem', password='admin1234', db='Your_Problem', charset='utf8')
     cur = db.cursor()

@@ -2,7 +2,6 @@ from flask import Flask
 from flask_restful import Resource, Api, reqparse
 import database 
 import os
-# import RPi.GPIO as GPIO
 
 from colorama import init, Fore
 
@@ -11,19 +10,11 @@ init(autoreset=True)
 app = Flask(__name__)
 api = Api(app)
 
-# LED = 18
-# GPIO.setmode(GPIO.BCM)
-# GPIO.setup(LED, GPIO.OUT, initial=GPIO.LOW)
-
-
-# pwm_led = GPIO.PWM(LED, 500)
-
 # uri : /problems
 class ProblemsIndex(Resource):
     def get(self)->list:
         """ ProblemsIndex.get : db에서 고민 목록을 받아와 간략한 정보를 json으로 반환함 """
         problemsList = database.get_problems_list()
-        print(f"{Fore.BLUE}[GET /problem/] after fetching data from DB")
         problemsCount = len(problemsList)
         problemsJsonList = list(map(lambda p:
         {
@@ -34,7 +25,12 @@ class ProblemsIndex(Resource):
             "problemContent" : p[4][0:50]
         } ,problemsList))
 
-        return { "Counts" : problemsCount, "Problems" : problemsJsonList}
+        return {
+            "StatusCode" : 400,
+            "Message" : "Get Successful", 
+            "Counts" : problemsCount,
+            "Problems" : problemsJsonList
+            }
 
     def post(self):
         """ ProblemsIndex.post : post로 json형식으로 보낸 나의 고민 정보를 데이터베이스에 추가시켜줌 """
@@ -55,10 +51,10 @@ class ProblemsIndex(Resource):
                 args['problemContent']
                 )
 
-            return {'StatusCode' : '400', 'ResultId' : resultId, 'Message' : 'Post Successful'}
+            return {'StatusCode' : '400', 'Message' : 'Post Successful', 'ResultId' : resultId}
 
         except Exception as e:
-            return {'StatusCode' : '1000', 'ResultId' : -1, 'Message' : f'Post Failed : {e}'}
+            return {'StatusCode' : '1000', 'Message' : f'Post Failed : {e}', 'ResultId' : -1}
         
 
 # uri : /problems/<int:problem_id>/problem
@@ -67,11 +63,15 @@ class Problems(Resource) :
         """ Problems.get : db에서 problemId == problem_id 인 고민의 정보 전체를 json으로 반환함 """
         problemData = database.get_problem(problem_id)
         return {
-            "problemId" : problemData[0],
-            "problemTitle" : problemData[1],
-            "problemAuthor" : problemData[2],
-            "problemTime" : problemData[3],
-            "problemContent" : problemData[4]
+            "StatusCode" : 400,
+            "Message" : "Get Successful",
+            "ProblemData" : { 
+                "problemId" : problemData[0],
+                "problemTitle" : problemData[1],
+                "problemAuthor" : problemData[2],
+                "problemTime" : problemData[3],
+                "problemContent" : problemData[4]
+            }
         }
 
 # uri : /problems/<int:id>/replys
@@ -90,7 +90,12 @@ class ReplysIndex(Resource):
             "replyContent" : reply[5][0:50]
         } ,replysList))
 
-        return { "Counts" : replysCount, "Replys" : replysJsonList}
+        return { 
+            "StatusCode" : 400,
+            "Message" : "Get Successful",
+            "Counts" : replysCount,
+            "Replys" : replysJsonList
+            }
 
     def post(self, problem_id):
         """ problemId == id인 고민에 대한 답장 정보를 받아 DB에 추가한다. 그 후 응답을 한다. """
@@ -121,12 +126,16 @@ class Replys(Resource):
         """ Replys.get : replyId == reply_id 인 답장의 전체 내용을 json파일로 보내준다. """
         replyData = database.get_reply(reply_id)
         return {
-            "problemId" : replyData[0],
-            "replyTitle" : replyData[1],
-            "replyAuthor" : replyData[2],
-            "problemTime" : replyData[3],
-            "replyTime" : replyData[4],
-            "replyContent" : replyData[5]
+            "StatusCode" : 400,
+            "Message" : "Get Successful",
+            "ReplyData":{
+                "problemId" : replyData[0],
+                "replyTitle" : replyData[1],
+                "replyAuthor" : replyData[2],
+                "problemTime" : replyData[3],
+                "replyTime" : replyData[4],
+                "replyContent" : replyData[5]
+            }
         }
 
 # uri : /lights/setLevel<int:level>
@@ -134,7 +143,6 @@ class Lights(Resource):
     def get(self, level):
         print(f"[api.py /lights/setLevel/<int:level>] : setting Level to {level}")
         try :
-            # pwm_led.start(level)
             print(f"Successfully set light level to {level}")
             return {"Message": f"Successfully set light level to {level}"}
 
@@ -155,4 +163,3 @@ def runServer(f_debug: bool= False) :
 
 if __name__ == '__main__':
     runServer(f_debug=True)
-    # GPIO.cleanup()

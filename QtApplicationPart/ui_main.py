@@ -316,13 +316,13 @@ class Ui_MainWindow(object):
         self.gridLayout_5 = QtWidgets.QGridLayout(self.page5)
         self.gridLayout_5.setVerticalSpacing(20)
         self.gridLayout_5.setObjectName("gridLayout_5")
-        self.sixthLabel1 = QtWidgets.QLabel(self.page5)
-        self.sixthLabel1.setStyleSheet("font: 75 30pt \"Tmoney RoundWind\";")
-        self.sixthLabel1.setObjectName("sixthLabel1")
-        self.gridLayout_5.addWidget(self.sixthLabel1, 1, 0, 1, 1, QtCore.Qt.AlignHCenter|QtCore.Qt.AlignBottom)
-        self.sixthLabel2 = QtWidgets.QLabel(self.page5)
-        self.sixthLabel2.setObjectName("sixthLabel2")
-        self.gridLayout_5.addWidget(self.sixthLabel2, 2, 0, 1, 1, QtCore.Qt.AlignHCenter|QtCore.Qt.AlignTop)
+        self.fifthLabel1 = QtWidgets.QLabel(self.page5)
+        self.fifthLabel1.setStyleSheet("font: 75 30pt \"Tmoney RoundWind\";")
+        self.fifthLabel1.setObjectName("fifthLabel1")
+        self.gridLayout_5.addWidget(self.fifthLabel1, 1, 0, 1, 1, QtCore.Qt.AlignHCenter|QtCore.Qt.AlignBottom)
+        self.fifthLabel2 = QtWidgets.QLabel(self.page5)
+        self.fifthLabel2.setObjectName("fifthLabel2")
+        self.gridLayout_5.addWidget(self.fifthLabel2, 2, 0, 1, 1, QtCore.Qt.AlignHCenter|QtCore.Qt.AlignTop)
         self.stackedWidget.addWidget(self.page5)
         self.page6 = QtWidgets.QWidget()
         self.page6.setObjectName("page6")
@@ -361,7 +361,7 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(6)
+        self.stackedWidget.setCurrentIndex(0)
         self.nameLineEdit.returnPressed.connect(self.goToPage2Btn.click)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
@@ -379,15 +379,40 @@ class Ui_MainWindow(object):
         self.postProblemBtn.setText(_translate("MainWindow", "보내기"))
         self.label.setText(_translate("MainWindow", "답장을 보낼 다른 사람의 고민을 선택해주세요!"))
         self.goToPage4Btn.setText(_translate("MainWindow", "선택하고 다음으로 가기"))
+        self.replyContentTextEdit.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'티머니 둥근바람 Regular\'; font-size:16pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
         self.replyContentTextEdit.setPlaceholderText(_translate("MainWindow", "이곳에 내용을 입력"))
         self.backToPage3Btn.setText(_translate("MainWindow", "뒤로가기"))
         self.postReplyBtn.setText(_translate("MainWindow", "답장 전송하기"))
+        self.replyTitleTextEdit.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'티머니 둥근바람 Regular\'; font-size:16pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
         self.replyTitleTextEdit.setPlaceholderText(_translate("MainWindow", "이곳에 제목을 입력"))
+        self.otherProblemTextBrower.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'Tmoney RoundWind\'; font-size:16pt; font-weight:80; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
         self.otherProblemTextBrower.setPlaceholderText(_translate("MainWindow", "이곳에 다른 사람의 고민이 있을거임"))
         self.replyPostLabel.setText(_translate("MainWindow", "다른 사람의 고민에 따뜻한 답장을 보내주세요!"))
-        self.sixthLabel1.setText(_translate("MainWindow", "정말 마음 따뜻해지는 답장이군요!"))
-        self.sixthLabel2.setText(_translate("MainWindow", "님의 답장도 곧 돌아올거에요... 편안히 기다려주세요"))
+        self.fifthLabel1.setText(_translate("MainWindow", "정말 마음 따뜻해지는 답장이군요!"))
+        self.fifthLabel2.setText(_translate("MainWindow", "님의 답장도 곧 돌아올거에요... 편안히 기다려주세요"))
+        self.myProblemTextBrowser.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'Tmoney RoundWind\'; font-size:16pt; font-weight:80; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
         self.myProblemTextBrowser.setPlaceholderText(_translate("MainWindow", "여기에 나의 고민이 있음"))
         self.replyLabel.setText(_translate("MainWindow", "답장이 도착했습니다!"))
+        self.otherReplyTextBrowser.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'Tmoney RoundWind\'; font-size:16pt; font-weight:80; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
         self.otherReplyTextBrowser.setPlaceholderText(_translate("MainWindow", "여기에 답장이 있음"))
 import resources_rc

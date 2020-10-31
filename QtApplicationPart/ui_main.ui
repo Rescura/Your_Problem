@@ -90,7 +90,7 @@ QTextBrowser{
 </string>
       </property>
       <property name="currentIndex">
-       <number>6</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="page0">
        <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,0,0,0,0">
@@ -500,6 +500,13 @@ background-color: rgb(255, 255, 255);</string>
           <property name="tabChangesFocus">
            <bool>true</bool>
           </property>
+          <property name="html">
+           <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'티머니 둥근바람 Regular'; font-size:16pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
           <property name="placeholderText">
            <string>이곳에 내용을 입력</string>
           </property>
@@ -540,6 +547,13 @@ background-color: rgb(255, 255, 255);</string>
           <property name="tabChangesFocus">
            <bool>true</bool>
           </property>
+          <property name="html">
+           <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'티머니 둥근바람 Regular'; font-size:16pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
           <property name="placeholderText">
            <string>이곳에 제목을 입력</string>
           </property>
@@ -547,6 +561,13 @@ background-color: rgb(255, 255, 255);</string>
         </item>
         <item row="1" column="0" rowspan="2">
          <widget class="QTextBrowser" name="otherProblemTextBrower">
+          <property name="html">
+           <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Tmoney RoundWind'; font-size:16pt; font-weight:80; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
           <property name="placeholderText">
            <string>이곳에 다른 사람의 고민이 있을거임</string>
           </property>
@@ -567,7 +588,7 @@ background-color: rgb(255, 255, 255);</string>
          <number>20</number>
         </property>
         <item row="1" column="0" alignment="Qt::AlignHCenter|Qt::AlignBottom">
-         <widget class="QLabel" name="sixthLabel1">
+         <widget class="QLabel" name="fifthLabel1">
           <property name="styleSheet">
            <string notr="true">font: 75 30pt &quot;Tmoney RoundWind&quot;;</string>
           </property>
@@ -577,7 +598,7 @@ background-color: rgb(255, 255, 255);</string>
          </widget>
         </item>
         <item row="2" column="0" alignment="Qt::AlignHCenter|Qt::AlignTop">
-         <widget class="QLabel" name="sixthLabel2">
+         <widget class="QLabel" name="fifthLabel2">
           <property name="text">
            <string>님의 답장도 곧 돌아올거에요... 편안히 기다려주세요</string>
           </property>
@@ -594,6 +615,13 @@ background-color: rgb(255, 255, 255);</string>
          <widget class="QTextBrowser" name="myProblemTextBrowser">
           <property name="tabChangesFocus">
            <bool>true</bool>
+          </property>
+          <property name="html">
+           <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Tmoney RoundWind'; font-size:16pt; font-weight:80; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="placeholderText">
            <string>여기에 나의 고민이 있음</string>
@@ -614,6 +642,13 @@ background-color: rgb(255, 255, 255);</string>
           </property>
           <property name="lineWrapMode">
            <enum>QTextEdit::WidgetWidth</enum>
+          </property>
+          <property name="html">
+           <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Tmoney RoundWind'; font-size:16pt; font-weight:80; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="placeholderText">
            <string>여기에 답장이 있음</string>
