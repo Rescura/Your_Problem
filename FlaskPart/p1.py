@@ -1,21 +1,38 @@
 # -*- coding: utf-8 -*-
-# 필요한 모듈을 불러옵니다.
+from flask import Flask, request
+from flask import render_template
 import RPi.GPIO as GPIO
-import time
-# 사용할 GPIO핀의 번호를 선정합니다.
+
+app = Flask(__name__)
 LED = 8
 
-# 사용할 GPIO모드를 선택합니다. BOARD는 순서, BCM은 사전예약 순서
-GPIO.setmode(GPIO.BOARD)
-
+GPIO.setmode(GPIO.BOARD) #BOARD는 커넥터 pin번호 사용
 GPIO.setup(LED, GPIO.OUT, initial=GPIO.LOW)
 
-for i in range(10):
-	GPIO.output(LED, GPIO.HIGH)
-	time.sleep(0.5)
-			
-	GPIO.output(LED, GPIO.LOW)
-	time.sleep(0.5)
+@app.route("/")
+def home():
+    return render_template("index.html")
 
-# GPIO 설정 초기화
-GPIO.cleanup()      
+@app.route("/led/on")
+def led_on():
+    try:
+        GPIO.output(LED, GPIO.HIGH)
+        return "ok"
+    except expression as identifier:
+        return "fail"
+
+@app.route("/led/off")
+def led_off():
+    try:
+        GPIO.output(LED, GPIO.LOW)
+        return "ok"
+    except expression as identifier:
+        return "fail"
+
+@app.route("/gpio/clean")
+def gpio_clean():
+    GPIO.cleanup()
+    return "GPIO CLEANUP"
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0")

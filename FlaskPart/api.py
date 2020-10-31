@@ -1,16 +1,29 @@
 from flask import Flask
 from flask_restful import Resource, Api, reqparse
 import database 
+import os
+import RPi.GPIO as GPIO
+
+from colorama import init, Fore
+
+init(autoreset=True)
 
 app = Flask(__name__)
 api = Api(app)
 
-# uri : /problems
-class ProblemsIndex(Resource) :
-    def get(self):
-        """ ProblemsIndex.get : db에서 고민 목록을 받아와 간략한 정보를 json으로 반환함 """
+LED = 18
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(LED, GPIO.OUT, initial=GPIO.LOW)
 
+
+pwm_led = GPIO.PWM(LED, 500)
+
+# uri : /problems
+class ProblemsIndex(Resource):
+    def get(self)->list:
+        """ ProblemsIndex.get : db에서 고민 목록을 받아와 간략한 정보를 json으로 반환함 """
         problemsList = database.get_problems_list()
+        print(f"{Fore.BLUE}[GET /problem/] after fetching data from DB")
         problemsCount = len(problemsList)
         problemsJsonList = list(map(lambda p:
         {
@@ -35,17 +48,17 @@ class ProblemsIndex(Resource) :
             parser.add_argument('problemContent', type=str)
             args = parser.parse_args()
             
-            database.insert_problem(
+            resultId = database.insert_problem(
                 args['problemTitle'],
                 args['problemAuthor'],
                 args['problemTime'],
                 args['problemContent']
                 )
 
-            return {'StatusCode' : '400', 'Message' : 'Post Successful'}
+            return {'StatusCode' : '400', 'ResultId' : resultId, 'Message' : 'Post Successful'}
 
         except Exception as e:
-            return {'StatusCode' : '1000', 'Message' : f'Post Failed : {e}'}
+            return {'StatusCode' : '1000', 'ResultId' : -1, 'Message' : f'Post Failed : {e}'}
         
 
 # uri : /problems/<int:problem_id>/problem
@@ -116,31 +129,30 @@ class Replys(Resource):
             "replyContent" : replyData[5]
         }
 
-# uri : /lights/<str:mode>
+# uri : /lights/setLevel<int:level>
 class Lights(Resource):
-    def get(self, mode):
-        if mode == 'on' :
-            # TODO : LED를 켜는 함수 붙여넣기
-            pass
-        elif mode == 'off':
-            # TODO : LED를 끄는 함수 붙여넣기
-            pass
-        elif mode == 'brighter' :
-            # TODO : LED를 밝게 하는 함수 붙여넣기
-            pass
-        elif mode == 'dimmer' :
-            # TODO : LED를 어둡게 하는 함수 붙여넣기
-            pass
+    def get(self, level):
+        print(f"[api.py /lights/setLevel/<int:level>] : setting Level to {level}")
+        try :
+            pwm_led.start(level)
+            print(f"Successfully set light level to {level}")
+            return {"Message": f"Successfully set light level to {level}"}
+
+        except Exception as e:
+            print(f"Failed to set light level to {level}")
+            return {"Message": f"Failed to Set light level to {level} | {e}" }
+
 
 api.add_resource(ProblemsIndex, '/problems/')
 api.add_resource(Problems, '/problems/<int:problem_id>/problem')
 api.add_resource(ReplysIndex, '/problems/<int:problem_id>/reply')
 api.add_resource(Replys, '/problems/<int:problem_id>/reply/<int:reply_id>')
-api.add_resource(Lights, '/lights/<str:mode>')
+api.add_resource(Lights, '/lights/setLevel<int:level>')
 
-def runServer() : 
+def runServer(f_debug: bool= False) : 
     database.create_table()
-    app.run()
+    app.run(debug=True)
 
 if __name__ == '__main__':
-    runServer()
+    runServer(f_debug=True)
+    GPIO.cleanup()

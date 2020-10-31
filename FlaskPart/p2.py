@@ -1,20 +1,64 @@
-#-*-coding:utf-8-*-
+import RPi.GPIO as GPIO
+import pymysql
 
-# 필요한 라이브러리를 불러옵니다. 
-import RPi.GPIO as GPIO 
-import time
+from flask import Flask, request
 
-# 사용할 GPIO 핀의 번호를 선정합니다.
-button_pin = 10
- 
-# GPIO핀의 번호 모드 설정
-GPIO.setmode(GPIO.BOARD) 
+app = Flask(__name__)
 
-# 버튼 핀의 입력설정 , PULL DOWN 설정 
-GPIO.setup(button_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) 
 
-while 1:  #무한반복 
-    # 만약 버튼핀에 High(1) 신호가 들어오면, "Button pushed!" 을 출력합니다.
-    if GPIO.input(button_pin) == GPIO.HIGH:
-        print("Button pushed!")    
-    time.sleep(0.1)    # 0.1초 딜레이
+db=pymysql.connect(host='localhost', user='root', password='1234', db='mydb', charset='utf8')
+
+cur = db.cursor()
+cur.execute("SELECT * FROM test")
+rows = cur.fetchall()
+print(rows)
+db.close()
+
+
+btn=5
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(btn, GPIO.OUT, initial=GPIO.LOW )
+
+#동적 라우팅 <산형 괄호>
+#hello/on
+'''
+@app.route("/hello/<state>")
+def hello(state):
+    if state == "on":
+        GPIO.output(btn, GPIO.HIGH)
+    elif state == "off":
+        GPIO.output(btn, GPIO.LOW)
+    return "LED " + state
+'''
+
+
+
+#http://0.0.0.0:5001/btn?state=off 이런식으로 호출
+# 동적 라우팅<쿼리 스트링 사용>
+
+
+@app.route("/btn")
+def led():
+    state = request.values.get("state", "error")
+    if state == "on":
+        GPIO.output(btn, GPIO.HIGH)
+    elif state == "off":
+        GPIO.output(btn, GPIO.LOW)
+    elif state == "error":
+        return "쿼리 스트링 state가 전달 되지 않았음."
+    else:
+        return "잘못된 쿼리스트링이 전달되었습니다."
+    return "LED " + state
+
+@app.route("/지원이바보")
+def 지원이바보2():
+
+    return "정현이 바보22"
+
+@app.route("/gpio/cleanup")
+def gpio_cleanup():
+    GPIO.cleanup()
+    return "GPIO CLEANUP"
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5001)

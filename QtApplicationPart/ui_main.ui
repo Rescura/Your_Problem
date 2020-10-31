@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>817</width>
-    <height>758</height>
+    <width>994</width>
+    <height>787</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -78,21 +78,21 @@ QLineEdit:hover{
 }
 
 QEditText {
-	font: 16pt &quot;티머니 둥근바람 Regular&quot;;
+	font: 81 16pt &quot;Tmoney RoundWind&quot;;
 	background-color: rgb(255, 255, 255);
 }
 
 QTextBrowser{
-	font: 16pt &quot;티머니 둥근바람 Regular&quot;;
+	font: 81 16pt &quot;Tmoney RoundWind&quot;;
 	background-color: rgb(255, 255, 255);
 }
 
 </string>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>6</number>
       </property>
-      <widget class="QWidget" name="firstPage">
+      <widget class="QWidget" name="page0">
        <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,0,0,0,0">
         <property name="spacing">
          <number>20</number>
@@ -167,7 +167,7 @@ QTextBrowser{
          </widget>
         </item>
         <item alignment="Qt::AlignHCenter">
-         <widget class="QPushButton" name="goToPage2Btn">
+         <widget class="QPushButton" name="goToPage1Btn">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
             <horstretch>0</horstretch>
@@ -215,7 +215,7 @@ QTextBrowser{
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="secondPage">
+      <widget class="QWidget" name="page1">
        <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,0,0,0">
         <property name="spacing">
          <number>20</number>
@@ -284,7 +284,7 @@ QTextBrowser{
          </widget>
         </item>
         <item alignment="Qt::AlignHCenter">
-         <widget class="QPushButton" name="goToPage3Btn">
+         <widget class="QPushButton" name="goToPage2Btn">
           <property name="minimumSize">
            <size>
             <width>320</width>
@@ -314,7 +314,7 @@ QTextBrowser{
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="thirdPage">
+      <widget class="QWidget" name="page2">
        <layout class="QGridLayout" name="gridLayout_2" rowstretch="5,5,10,60,5">
         <property name="verticalSpacing">
          <number>6</number>
@@ -334,7 +334,7 @@ background-color: rgb(255, 255, 255);</string>
          </widget>
         </item>
         <item row="4" column="0" alignment="Qt::AlignHCenter">
-         <widget class="QPushButton" name="backToPage2Btn">
+         <widget class="QPushButton" name="backToPage1Btn">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -443,7 +443,7 @@ background-color: rgb(255, 255, 255);</string>
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="fourthPage">
+      <widget class="QWidget" name="page3">
        <layout class="QGridLayout" name="gridLayout" rowstretch="5,95,5">
         <property name="verticalSpacing">
          <number>10</number>
@@ -466,7 +466,7 @@ background-color: rgb(255, 255, 255);</string>
          </widget>
         </item>
         <item row="2" column="0" alignment="Qt::AlignHCenter">
-         <widget class="QPushButton" name="goToPage5Btn">
+         <widget class="QPushButton" name="goToPage4Btn">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
             <horstretch>0</horstretch>
@@ -486,8 +486,8 @@ background-color: rgb(255, 255, 255);</string>
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="fifthPage">
-       <layout class="QGridLayout" name="gridLayout_3" rowstretch="5,5,90,0" columnstretch="50,50,0">
+      <widget class="QWidget" name="page4">
+       <layout class="QGridLayout" name="gridLayout_3" rowstretch="5,5,90,0" columnstretch="50,50">
         <property name="verticalSpacing">
          <number>10</number>
         </property>
@@ -506,7 +506,7 @@ background-color: rgb(255, 255, 255);</string>
          </widget>
         </item>
         <item row="3" column="0">
-         <widget class="QPushButton" name="backToPage4Btn">
+         <widget class="QPushButton" name="backToPage3Btn">
           <property name="minimumSize">
            <size>
             <width>150</width>
@@ -561,7 +561,7 @@ background-color: rgb(255, 255, 255);</string>
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="sixthPage">
+      <widget class="QWidget" name="page5">
        <layout class="QGridLayout" name="gridLayout_5">
         <property name="verticalSpacing">
          <number>20</number>
@@ -585,13 +585,13 @@ background-color: rgb(255, 255, 255);</string>
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="seventhPage">
+      <widget class="QWidget" name="page6">
        <layout class="QGridLayout" name="gridLayout_6" rowstretch="5,90">
         <property name="spacing">
          <number>10</number>
         </property>
         <item row="1" column="0">
-         <widget class="QTextBrowser" name="myproblemTextBrowser">
+         <widget class="QTextBrowser" name="myProblemTextBrowser">
           <property name="tabChangesFocus">
            <bool>true</bool>
           </property>
@@ -657,7 +657,7 @@ background-color: rgb(255, 255, 255);</string>
   <connection>
    <sender>nameLineEdit</sender>
    <signal>returnPressed()</signal>
-   <receiver>goToPage3Btn</receiver>
+   <receiver>goToPage2Btn</receiver>
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">

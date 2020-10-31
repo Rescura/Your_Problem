@@ -1,3 +1,5 @@
 {
-    "python.pythonPath": ".venv\\Scripts\\python.exe"
+    "python.pythonPath": "c:\\Users\\ayj60\\OneDrive\\programming\\2020Hackerton\\Your_Problem\\.venv\\Scripts\\python.exe",
+    "todo-tree.tree.showCountsInTree": false,
+    "todo-tree.tree.showBadges": true
 }
