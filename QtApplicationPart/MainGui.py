@@ -9,7 +9,7 @@ from datetime import datetime
 from PyQt5 import QtWidgets
 from PyQt5 import QtCore
 from colorama import init, Fore, Back, Style
-# import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 
 # 필요한 클래스 임포트
 # MainGui.py를 직접 실행하면 ui_main 모듈안에 있는 클래스를 임포트 시켜야 함
@@ -23,9 +23,9 @@ else : from QtApplicationPart import requestFunc
 init(autoreset=True)
 
 # GPIO 제어를 위한 설정
-# LED = 18
-# GPIO.setmode(GPIO.BCM)
-# GPIO.setup(LED, GPIO.OUT, initial=GPIO.LOW)
+LED = 18
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(LED, GPIO.OUT, initial=GPIO.LOW)
 
 class MainWindow(QtWidgets.QMainWindow) :
     def __init__(self) :
@@ -93,8 +93,8 @@ class MainWindow(QtWidgets.QMainWindow) :
             # 입력받은 이름으로 5번 페이지에 fifthLabel2 텍스트를 세팅함
             self.ui.fifthLabel2.setText(f'{_userName}님의 답장도 곧 돌아올거에요... 편안히 기다려주세요')
             
-            # print(f'{Fore.WHITE}{Back.CYAN}[goToPage2()] : LED를 켭니다.')
-            # GPIO.output(LED, GPIO.HIGH)
+            print(f'{Fore.BLACK}{Back.CYAN}[goToPage2()] : LED를 켭니다.')
+            GPIO.output(LED, GPIO.HIGH)
             
     
     #### 2번 페이지 (내 고민 입력) UI 함수들 ####
@@ -102,6 +102,9 @@ class MainWindow(QtWidgets.QMainWindow) :
         ''' 2번 페이지 (내 고민 입력) -> 1번 페이지 (이름 입력)'''
         print(f'{Fore.BLACK}{Back.WHITE}[backToPage1() - 실행됨] : Page2 -> Page1으로 이동합니다.')
         self.ui.stackedWidget.setCurrentIndex(1)
+        
+        print(f'{Fore.BLACK}{Back.CYAN}[goToPage2()] : Turn Off LED')
+        GPIO.output(LED, GPIO.LOW)
         return
 
     def onPostProblemBtnClicked(self) -> None:
@@ -312,4 +315,4 @@ if __name__ == "__main__" :
     myWindow = MainWindow() 
     myWindow.show()
     app.exec_()
-    # GPIO.cleanup()
+    GPIO.cleanup()

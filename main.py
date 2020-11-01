@@ -1,6 +1,6 @@
 import sys
 import os
-
+import RPi.GPIO as GPIO
 # GUI에 필요한 모듈과 라이브러리 임포트
 from PyQt5 import QtWidgets
 from QtApplicationPart.MainGui import MainWindow
@@ -14,3 +14,4 @@ if __name__ == "__main__" :
     myWindow = MainWindow() 
     myWindow.show()
     app.exec_()
+    GPIO.cleanup()
