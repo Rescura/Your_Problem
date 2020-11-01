@@ -2,7 +2,6 @@ from flask import Flask
 from flask_restful import Resource, Api, reqparse
 import database 
 import os
-import RPi.GPIO as GPIO
 
 from colorama import init, Fore
 
@@ -11,12 +10,6 @@ init(autoreset=True)
 app = Flask(__name__)
 api = Api(app)
 
-LED = 18
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(LED, GPIO.OUT, initial=GPIO.LOW)
-
-
-pwm_led = GPIO.PWM(LED, 500)
 
 # uri : /problems
 class ProblemsIndex(Resource):
@@ -34,7 +27,11 @@ class ProblemsIndex(Resource):
             "problemContent" : p[4][0:50]
         } ,problemsList))
 
-        return { "Counts" : problemsCount, "Problems" : problemsJsonList}
+        return { 
+            "StatusCode" : 400,
+            "Message" : "Get Successful",
+            "Counts" : problemsCount,
+            "Problems" : problemsJsonList}
 
     def post(self):
         """ ProblemsIndex.post : post로 json형식으로 보낸 나의 고민 정보를 데이터베이스에 추가시켜줌 """
@@ -66,34 +63,61 @@ class Problems(Resource) :
     def get(self, problem_id):
         """ Problems.get : db에서 problemId == problem_id 인 고민의 정보 전체를 json으로 반환함 """
         problemData = database.get_problem(problem_id)
-        return {
-            "problemId" : problemData[0],
-            "problemTitle" : problemData[1],
-            "problemAuthor" : problemData[2],
-            "problemTime" : problemData[3],
-            "problemContent" : problemData[4]
-        }
+        try : 
+            problemData_dict = {
+                "problemId" : problemData[0],
+                "problemTitle" : problemData[1],
+                "problemAuthor" : problemData[2],
+                "problemTime" : problemData[3],
+                "problemContent" : problemData[4],
+            }
+            return {
+                "StatusCode" : 400,
+                "Message" : "Get Successful", 
+                "ProblemData" : problemData_dict
+            }
+        except Exception as e :
+            return {
+                "StatusCode" : 500,
+                "Message" : f"{e}",
+                "ProblemData" : None, 
+            }
 
-# uri : /problems/<int:id>/replys
+# uri : /problems/<int:id>/reply
 class ReplysIndex(Resource):
     def get(self, problem_id):
         """ problemId == id 인 고민 정보를 최신순으로 모두 json형태로 반환한다. """
-        replysList = database.get_replys_list(problem_id)
-        replysCount = len(replysList)
-        replysJsonList = list(map(lambda reply:
-        {
-            "replyId" : reply[0],
-            "problemId" : reply[1],
-            "replyTitle" : reply[2],
-            "replyAuthor" : reply[3],
-            "replyTime" : reply[4],
-            "replyContent" : reply[5][0:50]
-        } ,replysList))
 
-        return { "Counts" : replysCount, "Replys" : replysJsonList}
+        replysList = database.get_replys_list(problem_id)
+        try :
+            replysCount = len(replysList)
+            replyDataList = list(map(lambda reply:
+            {
+                "replyId" : reply[0],
+                "problemId" : reply[1],
+                "replyTitle" : reply[2],
+                "replyAuthor" : reply[3],
+                "replyTime" : reply[4],
+                "replyContent" : reply[5][0:50]
+            } ,replysList))
+
+            return {
+                "StatusCode" : 400,
+                "Message" : "Get Successful",
+                "Counts" : replysCount,
+                "Replys" : replyDataList
+            }
+            
+        except Exception as e:
+          return {
+                "StatusCode" : 500,
+                "Message" : f"Get Failed : {e}",
+                "Counts" : 0,
+                "Replys" : None
+            }  
 
     def post(self, problem_id):
-        """ problemId == id인 고민에 대한 답장 정보를 받아 DB에 추가한다. 그 후 응답을 한다. """
+        """ problemId == id인 고민에 대한 답장 정보를 받아 DB에 추가한다. 그 후 응답을 보낸다. """
         try:
             parser = reqparse.RequestParser()
             parser.add_argument('replyTitle', type=str)
@@ -120,34 +144,31 @@ class Replys(Resource):
     def get(self, problem_id, reply_id):
         """ Replys.get : replyId == reply_id 인 답장의 전체 내용을 json파일로 보내준다. """
         replyData = database.get_reply(reply_id)
-        return {
-            "problemId" : replyData[0],
-            "replyTitle" : replyData[1],
-            "replyAuthor" : replyData[2],
-            "problemTime" : replyData[3],
-            "replyTime" : replyData[4],
-            "replyContent" : replyData[5]
-        }
-
-# uri : /lights/setLevel<int:level>
-class Lights(Resource):
-    def get(self, level):
-        print(f"[api.py /lights/setLevel/<int:level>] : setting Level to {level}")
-        try :
-            pwm_led.start(level)
-            print(f"Successfully set light level to {level}")
-            return {"Message": f"Successfully set light level to {level}"}
-
-        except Exception as e:
-            print(f"Failed to set light level to {level}")
-            return {"Message": f"Failed to Set light level to {level} | {e}" }
-
+        try : 
+            replyData_dict = {
+                "replyId" : replyData[0],
+                "problemId" : replyData[1],
+                "replyTitle" : replyData[2],
+                "replyAuthor" : replyData[3],
+                "replyTime" : replyData[4],
+                "replyContent" : replyData[5]
+            }
+            return {
+                "StatusCode" : 400,
+                "Message" : "Get Successful", 
+                "ReplyData" : replyData_dict
+            }
+        except Exception as e :
+            return {
+                "StatusCode" : 500,
+                "Message" : f"{e}",
+                "ReplyData" : None, 
+            }
 
 api.add_resource(ProblemsIndex, '/problems/')
 api.add_resource(Problems, '/problems/<int:problem_id>/problem')
 api.add_resource(ReplysIndex, '/problems/<int:problem_id>/reply')
 api.add_resource(Replys, '/problems/<int:problem_id>/reply/<int:reply_id>')
-api.add_resource(Lights, '/lights/setLevel<int:level>')
 
 def runServer(f_debug: bool= False) : 
     database.create_table()
@@ -155,5 +176,4 @@ def runServer(f_debug: bool= False) :
 
 if __name__ == '__main__':
     runServer(f_debug=True)
-    GPIO.cleanup()
 

@@ -5,7 +5,7 @@ from colorama import init, Fore, Back, Style
 init(autoreset=True)
 
 def create_table() -> None:
-    """ PROBLEMS 테이블과 REPLYS 테이블을 생성한다. """
+    """ PROBLEMS, REPLYS, NEW_REPLYS 테이블을 생성한다. """
     print(f'{Fore.BLACK}{Back.CYAN}[database.py | create_table()] : 데이터베이스에 테이블을 생성합니다.')
     db = pymysql.connect(host='localhost', user='Admin_Your_Problem', password='admin1234', db='Your_Problem', charset='utf8')
     cur = db.cursor()
@@ -22,6 +22,18 @@ def create_table() -> None:
     # REPLYS 테이블 생성하기
     cur.execute('''
         CREATE TABLE IF NOT EXISTS REPLYS(
+            replyId INT PRIMARY KEY AUTO_INCREMENT,
+            problemId INT NOT NULL,
+            replyTitle TEXT NOT NULL,
+            replyAuthor TEXT NOT NULL,
+            replyTime VARCHAR(19),
+            replyContent TEXT NOT NULL,
+            FOREIGN KEY(problemId) REFERENCES PROBLEMS(problemId)
+        )'''
+    )
+    # NEW_REPLYS 테이블 생성하기
+    cur.execute('''
+        CREATE TABLE IF NOT EXISTS NEW_REPLYS(
             replyId INT PRIMARY KEY AUTO_INCREMENT,
             problemId INT NOT NULL,
             replyTitle TEXT NOT NULL,
@@ -84,8 +96,8 @@ def insert_problem(f_title, f_author, f_time, f_content) -> int:
     try :
         cur = db.cursor()
         cur.execute("INSERT INTO PROBLEMS (problemTitle, problemAuthor, problemTime, problemContent) VALUES (%s, %s, %s, %s)", (f_title, f_author, f_time, f_content))  #DB에 데이터 넣는 부분
-        cur.execute('SELECT problemId FROM PROBLEMS WHERE problemTitle = %s AND problemAuthor = %s, problemContent = %s ORDER BY problemTime', (f_title, f_author, f_content))
-        resultId = cur.fetchOne()[0]
+        cur.execute('SELECT problemId FROM PROBLEMS WHERE problemTitle = %s AND problemAuthor = %s AND problemContent = %s ORDER BY problemTime', (f_title, f_author, f_content))
+        resultId = cur.fetchone()[0]
         print(f"{Fore.GREEN}{Back.BLUE}[database.py] : 추가된 고민 레이블의 problemId: {resultId}")
         db.commit()
         

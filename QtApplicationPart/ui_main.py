@@ -415,4 +415,7 @@ class Ui_MainWindow(object):
 "</style></head><body style=\" font-family:\'Tmoney RoundWind\'; font-size:16pt; font-weight:80; font-style:normal;\">\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
         self.otherReplyTextBrowser.setPlaceholderText(_translate("MainWindow", "여기에 답장이 있음"))
-import resources_rc
+try :
+        from QtApplicationPart import resources_rc
+except:
+        import resources_rc
